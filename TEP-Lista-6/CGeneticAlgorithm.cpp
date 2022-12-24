@@ -5,10 +5,10 @@ CGeneticAlgorithm::CGeneticAlgorithm() {
 	backpackSize = DEFBACKPACKSIZE;
 	for (int i = 0; i < DEFITEMCOUNT; i++)
 	{
-		itemTable[i] = make_pair(i,i);
+		itemTable[i] = make_pair(i, i);
 	}
 	constructionError = 0;
-}
+};
 CGeneticAlgorithm::CGeneticAlgorithm(double size) {
 	if (size > 0) backpackSize = size;
 	else
@@ -21,7 +21,7 @@ CGeneticAlgorithm::CGeneticAlgorithm(double size) {
 		itemTable[i] = make_pair(i, i);
 	}
 
-}
+};
 CGeneticAlgorithm::CGeneticAlgorithm(vector<pair<double, double>> table) {
 	if (table.size() > 0) itemTable = table;
 	else
@@ -33,10 +33,14 @@ CGeneticAlgorithm::CGeneticAlgorithm(vector<pair<double, double>> table) {
 		constructionError = ERRORVECTOR;
 	}
 	backpackSize = DEFBACKPACKSIZE;
-}
+};
 CGeneticAlgorithm::CGeneticAlgorithm(double size, vector<pair<double, double>> table) {
 	if (size > 0) backpackSize = size;
-	else constructionError = ERRORSIZE;
+	else
+	{
+		backpackSize = DEFBACKPACKSIZE;
+		constructionError = ERRORSIZE;
+	}
 
 	if (table.size() > 0) itemTable = table;
 	else 
