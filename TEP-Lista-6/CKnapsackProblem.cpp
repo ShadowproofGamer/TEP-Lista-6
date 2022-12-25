@@ -70,6 +70,22 @@ double CKnapsackProblem::getAnswerValue(vector<int> answer)
 		}
 		
 	}
-	if (size > backpackSize) return result;
+	if (size <= backpackSize) return result;
+	else return -1;
+}
+
+double CKnapsackProblem::getAnswerValue(vector<bool> answer)
+{
+	double result = 0;
+	double size = 0;
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer.at(i))
+		{
+			result += itemTable.at(i).first;
+			size += itemTable.at(i).second;
+		}
+	}
+	if (size <= backpackSize) return result;
 	else return -1;
 }

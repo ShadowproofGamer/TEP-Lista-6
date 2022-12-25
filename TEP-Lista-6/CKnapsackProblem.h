@@ -19,5 +19,6 @@ public:
 	//CGeneticAlgorithm(int size, vector<int> values, vector<int> sizes );
 	//CGeneticAlgorithm(int size, vector<tuple<int, int>> table);
 	double getAnswerValue(vector<int> answer);
+	double getAnswerValue(vector<bool> answer);
 };
 
