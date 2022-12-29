@@ -1,5 +1,5 @@
 #include "CKnapsackProblem.h"
-
+using namespace std;
 
 CKnapsackProblem::CKnapsackProblem() {
 	backpackSize = DEFBACKPACKSIZE;
@@ -57,13 +57,61 @@ CKnapsackProblem::CKnapsackProblem(double size, vector<pair<double, double>> tab
 	}
 };
 
-double CKnapsackProblem::getAnswerValue(vector<int> answer)
+CKnapsackProblem::CKnapsackProblem(string filePath)
+{
+	try
+	{
+		ifstream myFile;
+		myFile.open(filePath);
+		if (myFile.is_open())
+		{
+			double backpackS, first, second;
+			int lines = 0;
+			myFile >> backpackS;
+			backpackSize = backpackS;
+			myFile >> lines;
+			if (lines <= 0) throw new exception();
+			for (size_t i = 0; i < lines; i++)
+			{
+				myFile >> first;
+				myFile >> second;
+				itemTable.push_back({ first, second });
+				cout << first << "\t" << second << "\n";
+
+			}
+			myFile.close();
+		}
+		else
+		{
+			cout << "failed to load from file!\n";
+			constructionError = FILENOTOPEN;
+			CKnapsackProblem();
+		}
+		
+	}
+	catch (exception e) 
+	{
+		cout << "failed to load from file!\n";
+		constructionError = FILECORRUPTED;
+		CKnapsackProblem();
+	}
+};
+
+
+double CKnapsackProblem::getAnswerValue(vector<int>* answer)
 {
 	double result = 0;
 	double size = 0;
-	for (int i = 0; i < answer.size(); i++)
+	int iter = 0;
+	//it answer is longer than backpack than the too long records are ignored:
+	if ((iter = answer->size()) > itemTable.size())
 	{
-		if (answer.at(i) == 1)
+		iter = itemTable.size();
+		answerError = ANSWERTOOLONG;
+	}
+	for (int i = 0; i < iter; i++)
+	{
+		if (answer->at(i) == 1)
 		{
 			result += itemTable.at(i).first;
 			size += itemTable.at(i).second;
@@ -74,13 +122,20 @@ double CKnapsackProblem::getAnswerValue(vector<int> answer)
 	else return -1;
 }
 
-double CKnapsackProblem::getAnswerValue(vector<bool> answer)
+double CKnapsackProblem::getAnswerValue(vector<bool>* answer)
 {
 	double result = 0;
 	double size = 0;
-	for (int i = 0; i < answer.size(); i++)
+	int iter = 0;
+	//it answer is longer than backpack than the too long records are ignored:
+	if ((iter = answer->size()) > itemTable.size())
 	{
-		if (answer.at(i))
+		iter = itemTable.size();
+		answerError = ANSWERTOOLONG;
+	}
+	for (int i = 0; i < iter; i++)
+	{
+		if (answer->at(i))
 		{
 			result += itemTable.at(i).first;
 			size += itemTable.at(i).second;
