@@ -5,6 +5,8 @@
 #include <fstream>
 #include <istream>
 #include <ostream>
+#include "CMySmartPointer.h"
+#include "CRefCounter.h"
 
 //CKnapsackProblem CONSTANTS AND ERRORS:
 #define DEFITEMCOUNT 10

@@ -130,7 +130,9 @@
     <ClInclude Include="CGeneticAlgorithm.h" />
     <ClInclude Include="CIndividual.h" />
     <ClInclude Include="CKnapsackProblem.h" />
+    <ClInclude Include="CMySmartPointer.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="CRefCounter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CGeneticAlgorithm.cpp" />
