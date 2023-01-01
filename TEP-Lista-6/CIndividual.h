@@ -19,6 +19,6 @@ public:
 	void calculateFitness();
 	void mutate();
 	void mutate(double percentToMutate);
-	CIndividual* reproduce(CIndividual& partner);
+	CIndividual* reproduce(CIndividual* partner);
 };
 

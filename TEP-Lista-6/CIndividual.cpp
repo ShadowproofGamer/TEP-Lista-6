@@ -34,6 +34,7 @@ void CIndividual::calculateFitness()
 
 void CIndividual::mutate()
 {
+	srand(time(0));
 	for (size_t i = 0; i < answer->size(); i++)
 	{
 		if (rand() % 2 == 0) (answer->at(i) += 1) %= 2;
@@ -47,6 +48,7 @@ void CIndividual::mutate(double percentToMutate)
 	int i = 0;
 	while (iter>0)
 	{
+		srand(time(0));
 		if (rand() % 2 == 0) {
 			(answer->at(i) += 1) %= 2;
 			iter--;
@@ -55,3 +57,19 @@ void CIndividual::mutate(double percentToMutate)
 	}
 };
 
+CIndividual* CIndividual::reproduce(CIndividual* partner)
+{
+	srand(time(0));
+	int size = answer->size();
+	double cut = rand() % size;
+	vector<int>* newAnswer;
+	for (size_t i = 0; i < cut; i++)
+	{
+		newAnswer->push_back(answer->at(i));
+	}
+	for (size_t i = cut; i < size; i++)
+	{
+		newAnswer->push_back(partner->answer->at(i));
+	}
+	return new CIndividual(newAnswer);
+};
