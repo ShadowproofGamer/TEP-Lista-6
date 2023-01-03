@@ -22,5 +22,6 @@ public:
 	//CGeneticAlgorithm(int size, vector<tuple<int, int>> table);
 	double getAnswerValue(vector<int>* answer);
 	double getAnswerValue(vector<bool>* answer);
+	double getBackpackSize();
 };
 

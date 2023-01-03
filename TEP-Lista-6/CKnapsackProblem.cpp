@@ -127,7 +127,7 @@ double CKnapsackProblem::getAnswerValue(vector<bool>* answer)
 	double result = 0;
 	double size = 0;
 	int iter = 0;
-	//it answer is longer than backpack than the too long records are ignored:
+	//if answer is longer than backpack than the too long records are ignored:
 	if ((iter = answer->size()) > itemTable.size())
 	{
 		iter = itemTable.size();
@@ -144,3 +144,9 @@ double CKnapsackProblem::getAnswerValue(vector<bool>* answer)
 	if (size <= backpackSize) return result;
 	else return -1;
 }
+
+double CKnapsackProblem::getBackpackSize()
+{
+	return backpackSize;
+};
+

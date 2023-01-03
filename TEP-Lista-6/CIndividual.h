@@ -10,15 +10,15 @@ class CIndividual
 {
 private:
 	vector<int>* answer;
-	CKnapsackProblem* parent;
-	double fitness = 0;
+	double fitness = -1;
 public:
 	CIndividual();
 	CIndividual(int vectorLength);
 	CIndividual(vector<int>* other);
-	void calculateFitness();
+	void calculateFitness(CKnapsackProblem* parent);
 	void mutate();
 	void mutate(double percentToMutate);
 	CIndividual* reproduce(CIndividual* partner);
+	double getFitness();
 };
 
