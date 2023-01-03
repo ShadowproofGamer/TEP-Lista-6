@@ -34,10 +34,17 @@ void CIndividual::calculateFitness(CKnapsackProblem* parent)
 
 void CIndividual::mutate()
 {
-	srand(time(0));
-	for (size_t i = 0; i < answer->size(); i++)
+	int size = answer->size();
+	int iter = roundl(DEFMUTATEPROBABILITY * size);
+	int i = 0;
+	while (iter > 0)
 	{
-		if (rand() % 2 == 0) (answer->at(i) += 1) %= 2;
+		srand(time(0));
+		if (rand() % 2 == 0) {
+			(answer->at(i) += 1) %= 2;
+			iter--;
+		}
+		(++i) %= size;
 	}
 };
 
@@ -52,8 +59,8 @@ void CIndividual::mutate(double percentToMutate)
 		if (rand() % 2 == 0) {
 			(answer->at(i) += 1) %= 2;
 			iter--;
-			(++i) %= size;
 		} 
+		(++i) %= size;
 	}
 };
 
@@ -64,7 +71,7 @@ CIndividual* CIndividual::reproduce(CIndividual* partner)
 		srand(time(0));
 		int size = answer->size();
 		double cut = rand() % size;
-		vector<int>* newAnswer;
+		vector<int>* newAnswer = new vector<int>;
 		for (size_t i = 0; i < cut; i++)
 		{
 			newAnswer->push_back(answer->at(i));
@@ -81,3 +88,45 @@ CIndividual* CIndividual::reproduce(CIndividual* partner)
 double CIndividual::getFitness() {
 	return fitness;
 }
+
+CIndividual::~CIndividual()
+{
+	answer->clear();
+	answer = NULL;
+};
+
+CIndividual* CIndividual::mutateInd()
+{
+	CIndividual* tempIndividual = new CIndividual(answer);
+	int size = answer->size();
+	int iter = roundl(DEFMUTATEPROBABILITY * size);
+	int i = 0;
+	while (iter > 0)
+	{
+		srand(time(0));
+		if (rand() % 2 == 0) {
+			(tempIndividual->answer->at(i) += 1) %= 2;
+			iter--;
+		}
+		(++i) %= size;
+	}
+	return tempIndividual;
+};
+
+CIndividual* CIndividual::mutateInd(double percentToMutate)
+{
+	CIndividual* tempIndividual = new CIndividual(answer);
+	int size = answer->size();
+	int iter = roundl(percentToMutate * size);
+	int i = 0;
+	while (iter > 0)
+	{
+		srand(time(0));
+		if (rand() % 2 == 0) {
+			(tempIndividual->answer->at(i) += 1) %= 2;
+			iter--;
+		}
+		(++i) %= size;
+	}
+	return tempIndividual;
+};

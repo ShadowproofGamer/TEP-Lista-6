@@ -53,13 +53,26 @@ void CGeneticAlgorithm::runOptimization()
 	{
 		int tempSizeV = individuals.size();
 		srand(time(0));
-		for (size_t i = 0; i < (tempSizeV / 2); i++)
+		for (size_t i = 0; i < tempSizeV; i++)
 		{
-			CIndividual* tempIndividual = individuals.at(rand() % tempSizeV)->reproduce(individuals.at(rand() % tempSizeV));
-			individuals.push_back(tempIndividual);
+			if (rand()%1000 > crossProbability*1000)
+			{
+				CIndividual* tempIndividual = individuals.at(rand() % tempSizeV)->reproduce(individuals.at(rand() % tempSizeV));
+				individuals.push_back(tempIndividual);
+			}
+		}
+		for (size_t i = 0; i < tempSizeV; i++)
+		{
+			if(rand()%1000 > mutateProbability*1000)
+			{
+				//TODO effective individual copying
+				CIndividual* tempIndividual =  individuals.at(rand() % tempSizeV);
+				//!
+				tempIndividual->mutate(DEFMUTATEPERCENT);
+				individuals.push_back(tempIndividual);
+			}
 		}
 		settleBestFitness();
-		sortVector();
 		cleanPopulation();
 	}
 
@@ -68,7 +81,16 @@ void CGeneticAlgorithm::runOptimization()
 
 void CGeneticAlgorithm::cleanPopulation()
 {
-	//TODO
+	sortVector();
+	for (size_t i = population; i < individuals.size(); i++)
+	{
+		individuals.pop_back();
+	}
+};
+
+bool compareCIndividual(CIndividual* i1, CIndividual* i2)
+{
+	return (i1->getFitness() > i2->getFitness());
 };
 
 void CGeneticAlgorithm::sortVector()
@@ -76,7 +98,4 @@ void CGeneticAlgorithm::sortVector()
 	sort(individuals.begin(), individuals.end(), compareCIndividual);
 };
 
-bool compareCIndividual(CIndividual* i1, CIndividual* i2)
-{
-	return (i1->getFitness() > i2->getFitness());
-};
+

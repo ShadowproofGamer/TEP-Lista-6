@@ -133,12 +133,14 @@
     <ClInclude Include="CMySmartPointer.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="CRefCounter.h" />
+    <ClInclude Include="Tests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CGeneticAlgorithm.cpp" />
     <ClCompile Include="CIndividual.cpp" />
     <ClCompile Include="CKnapsackProblem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Tekst.txt" />

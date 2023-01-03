@@ -15,9 +15,12 @@ public:
 	CIndividual();
 	CIndividual(int vectorLength);
 	CIndividual(vector<int>* other);
+	~CIndividual();
 	void calculateFitness(CKnapsackProblem* parent);
 	void mutate();
 	void mutate(double percentToMutate);
+	CIndividual* mutateInd();
+	CIndividual* mutateInd(double percentToMutate);
 	CIndividual* reproduce(CIndividual* partner);
 	double getFitness();
 };
