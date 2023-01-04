@@ -2,7 +2,7 @@
 
 CIndividual::CIndividual()
 {
-	
+	answer = new vector<int>;
 	srand(time(0));
 	for (size_t i = 0; i < DEFBACKPACKSIZE; i++)
 	{
@@ -12,6 +12,7 @@ CIndividual::CIndividual()
 
 CIndividual::CIndividual(int length)
 {
+	answer = new vector<int>;
 	srand(time(0));
 	for (size_t i = 0; i < length; i++)
 	{
@@ -21,6 +22,7 @@ CIndividual::CIndividual(int length)
 
 CIndividual::CIndividual(vector<int>* other)
 {
+	answer = new vector<int>;
 	for (size_t i = 0; i < other->size(); i++)
 	{
 		answer->push_back(other->at(i));
@@ -130,3 +132,14 @@ CIndividual* CIndividual::mutateInd(double percentToMutate)
 	}
 	return tempIndividual;
 };
+
+string CIndividual::getVector()
+{
+	string str = "";
+	for (size_t i = 0; i < answer->size(); i++)
+	{
+		str.push_back(answer->at(i)+48);
+	}
+	return str;
+};
+

@@ -10,12 +10,14 @@ private:
 	int population;
 	double crossProbability;
 	double mutateProbability;
-	double bestFitness;
-	vector<CIndividual*> individuals;
+	double bestFitness = -1;
+	vector<CIndividual*>* individuals;
 	CKnapsackProblem* algo;
 public:
 	CGeneticAlgorithm();
+	CGeneticAlgorithm(CKnapsackProblem* algorithm);
 	CGeneticAlgorithm(int pop, double cross, double mutate);
+	CGeneticAlgorithm(int pop, double cross, double mutate, CKnapsackProblem* algorithm);
 	void initializePopulation();
 	void runOptimization();
 	void settleBestFitness();

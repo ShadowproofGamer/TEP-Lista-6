@@ -23,5 +23,6 @@ public:
 	CIndividual* mutateInd(double percentToMutate);
 	CIndividual* reproduce(CIndividual* partner);
 	double getFitness();
+	string getVector();
 };
 

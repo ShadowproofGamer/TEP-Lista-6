@@ -71,6 +71,7 @@ CKnapsackProblem::CKnapsackProblem(string filePath)
 			backpackSize = backpackS;
 			myFile >> lines;
 			if (lines <= 0) throw new exception();
+			cout << backpackS<< "\n" << lines << "\n";
 			for (size_t i = 0; i < lines; i++)
 			{
 				myFile >> first;
