@@ -77,32 +77,34 @@ void CGeneticAlgorithm::runOptimization()
 	while (currentTime - startTime < DEFTIME)
 	{
 
-		int tempSizeV = individuals->size();
-		cout << "tempSizeV: " << tempSizeV << "\n";
+		
+		cout << "tempSizeV: " << individuals->size() << "\n";
 		srand(time(0));
-		for (size_t i = 0; i < tempSizeV; i++)
+		for (size_t i = 0; i < population; i++)
 		{
 			if (rand()%1000 > crossProbability*1000)
 			{
-				CIndividual* tempIndividual = individuals->at(rand() % tempSizeV)->reproduce(individuals->at(rand() % tempSizeV));
+				CIndividual* tempIndividual = individuals->at(rand() % individuals->size())->reproduce(individuals->at(rand() % individuals->size()));
 				individuals->push_back(tempIndividual);
 			}
 		}
-		cout << "tempSizeV after for 1: " << tempSizeV << "\n";
-		for (size_t i = 0; i < tempSizeV; i++)
+		cout << "tempSizeV after for 1: " << individuals->size() << "\n";
+		for (size_t i = 0; i < population; i++)
 		{
 			if(rand()%1000 > mutateProbability*1000)
 			{
 				//TODO effective individual copying
-				CIndividual* tempIndividual =  individuals->at(rand() % tempSizeV);
+				CIndividual* tempIndividual =  individuals->at(rand() % individuals->size());
 				//!
 				tempIndividual->mutate(DEFMUTATEPERCENT);
 				individuals->push_back(tempIndividual);
 			}
 		}
-		cout << "tempSizeV after for 2: " << tempSizeV << "\n";
+		cout << "tempSizeV after for 2: " << individuals->size() << "\n";
 		settleBestFitness();
 		cleanPopulation();
+		//currentTime = time(0);
+		cout << "best fitness: " << getBestFitness() << " time: " << (startTime-currentTime) << endl;
 	}
 	cout << getBestFitness() << endl;
 
@@ -111,13 +113,15 @@ void CGeneticAlgorithm::runOptimization()
 void CGeneticAlgorithm::cleanPopulation()
 {
 	sortVector();
+	cout << "Size before cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
+
 	
 	for (size_t i = population; i < (individuals->size()); i++)
 	{
-		individuals->erase(individuals->begin()+i);
+		individuals->erase(individuals->begin()+population);
 	}
 
-	cout << "Size after cleaning: " << individuals->size() << "\n";
+	cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 };
 
 bool compareCIndividual(CIndividual* i1, CIndividual* i2)
