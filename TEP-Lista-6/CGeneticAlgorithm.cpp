@@ -33,9 +33,17 @@ CGeneticAlgorithm::CGeneticAlgorithm(int pop, double cross, double mutate, CKnap
 	individuals = new vector<CIndividual*>;
 };
 void CGeneticAlgorithm::initializePopulation() {
-	for (size_t i = 0; i < population; i++)
+	//adding vector 0
+	vector<int>* tmp = new vector<int>;
+	for (size_t i = 0; i < algo->getItemsAmount(); i++)
 	{
-		individuals->push_back(new CIndividual(algo->getBackpackSize()));
+		tmp->push_back(0);
+	}
+	individuals->push_back(new CIndividual(tmp));
+	//adding vectors (random):
+	for (size_t i = 0; i < (population-1); i++)
+	{
+		individuals->push_back(new CIndividual(algo->getItemsAmount()));
 	}
 }
 
@@ -72,13 +80,20 @@ void CGeneticAlgorithm::runOptimization()
 	*/
 	initializePopulation();
 	settleBestFitness();
+
+	/*
+	cout << "all vectors:\n";
+	sortVector();
+	showAnswers();
+	*/
+
 	time_t startTime = time(0);
 	time_t currentTime = time(0);
 	while (currentTime - startTime < DEFTIME)
 	{
 
 		
-		cout << "tempSizeV: " << individuals->size() << "\n";
+		//cout << "tempSizeV: " << individuals->size() << "\n";
 		srand(time(0));
 		for (size_t i = 0; i < population; i++)
 		{
@@ -88,7 +103,7 @@ void CGeneticAlgorithm::runOptimization()
 				individuals->push_back(tempIndividual);
 			}
 		}
-		cout << "tempSizeV after for 1: " << individuals->size() << "\n";
+		//cout << "tempSizeV after for 1: " << individuals->size() << "\n";
 		for (size_t i = 0; i < population; i++)
 		{
 			if(rand()%1000 > mutateProbability*1000)
@@ -100,28 +115,36 @@ void CGeneticAlgorithm::runOptimization()
 				individuals->push_back(tempIndividual);
 			}
 		}
-		cout << "tempSizeV after for 2: " << individuals->size() << "\n";
-		settleBestFitness();
+		//cout << "tempSizeV after for 2: " << individuals->size() << "\n";
+		//settleBestFitness();
+		//cout << "best fitness: " << getBestFitness() << " time: " << (currentTime - startTime) << endl;
 		cleanPopulation();
-		//currentTime = time(0);
-		cout << "best fitness: " << getBestFitness() << " time: " << (startTime-currentTime) << endl;
+		currentTime = time(0);
 	}
-	cout << getBestFitness() << endl;
+	/*
+	cout << "all vectors:\n";
+	sortVector();
+	showAnswers();
+	*/
+	cout << "\nbest fitness achieved: " << getBestFitness() << endl;
+	
 
 };
 
 void CGeneticAlgorithm::cleanPopulation()
 {
 	sortVector();
-	cout << "Size before cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
+	//cout << "Size before cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 
-	
-	for (size_t i = population; i < (individuals->size()); i++)
+	int tmp = (individuals->size());
+	for (size_t i = population; i < tmp; i++)
 	{
-		individuals->erase(individuals->begin()+population);
+		//individuals->erase(individuals->begin()+population);
+		//delete individuals->back();
+		individuals->pop_back();
+		
 	}
-
-	cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
+	//cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 };
 
 bool compareCIndividual(CIndividual* i1, CIndividual* i2)
@@ -134,4 +157,10 @@ void CGeneticAlgorithm::sortVector()
 	sort(individuals->begin(), individuals->end(), compareCIndividual);
 };
 
-
+void CGeneticAlgorithm::showAnswers() 
+{
+	for (size_t i = 0; i < individuals->size(); i++)
+	{
+		cout << individuals->at(i)->getVector() << endl;
+	};
+}

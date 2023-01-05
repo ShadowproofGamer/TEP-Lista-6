@@ -16,6 +16,8 @@ public:
 	CKnapsackProblem(vector<pair<double, double>> table);
 	CKnapsackProblem(double size, vector<pair<double, double>> table);
 	CKnapsackProblem(string filePath);
+	CKnapsackProblem(int items);
+	CKnapsackProblem(int items, double size);
 	//optional constructors
 	//CGeneticAlgorithm(vector<int> values, vector<int> sizes);
 	//CGeneticAlgorithm(int size, vector<int> values, vector<int> sizes );
@@ -23,5 +25,6 @@ public:
 	double getAnswerValue(vector<int>* answer);
 	double getAnswerValue(vector<bool>* answer);
 	double getBackpackSize();
+	int getItemsAmount();
 };
 

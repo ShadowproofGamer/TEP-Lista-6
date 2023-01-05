@@ -24,5 +24,6 @@ public:
 	double getBestFitness();
 	void cleanPopulation();
 	void sortVector();
+	void showAnswers();
 };
 

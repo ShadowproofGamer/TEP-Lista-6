@@ -13,7 +13,7 @@ CIndividual::CIndividual()
 CIndividual::CIndividual(int length)
 {
 	answer = new vector<int>;
-	srand(time(0));
+	//srand(time(0));
 	for (size_t i = 0; i < length; i++)
 	{
 		answer->push_back(rand()%2);
@@ -55,9 +55,9 @@ void CIndividual::mutate(double percentToMutate)
 	int size = answer->size();
 	int iter = roundl(percentToMutate*size);
 	int i = 0;
+	srand(time(0));
 	while (iter>0)
 	{
-		srand(time(0));
 		if (rand() % 2 == 0) {
 			(answer->at(i) += 1) %= 2;
 			iter--;
@@ -94,7 +94,7 @@ double CIndividual::getFitness() {
 CIndividual::~CIndividual()
 {
 	answer->clear();
-	answer = NULL;
+	delete answer;
 };
 
 CIndividual* CIndividual::mutateInd()

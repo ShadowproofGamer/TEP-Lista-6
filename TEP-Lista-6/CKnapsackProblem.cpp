@@ -2,15 +2,17 @@
 using namespace std;
 
 CKnapsackProblem::CKnapsackProblem() {
+	srand(time(0));
 	backpackSize = DEFBACKPACKSIZE;
 	for (int i = 0; i < DEFITEMCOUNT; i++)
 	{
-		itemTable.push_back(make_pair(i, i));
+		itemTable.push_back(make_pair(rand() % (i+1), rand() % (i+1)));
 	}
 	constructionError = 0;
 };
 
 CKnapsackProblem::CKnapsackProblem(double size) {
+	srand(time(0));
 	if (size > 0) backpackSize = size;
 	else
 	{
@@ -19,7 +21,60 @@ CKnapsackProblem::CKnapsackProblem(double size) {
 	}
 	for (int i = 0; i < DEFITEMCOUNT; i++)
 	{
-		itemTable.push_back(make_pair(i, i));
+		itemTable.push_back(make_pair(rand() % (i+1), rand() % (i+1)));
+	}
+
+};
+
+CKnapsackProblem::CKnapsackProblem(int items) {
+	srand(time(0));
+	backpackSize = DEFBACKPACKSIZE;
+	constructionError = ERRORSIZE;
+	if (items > 0)
+	{
+		for (int i = 0; i < items; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
+	}
+	else
+	{
+		for (int i = 0; i < DEFITEMCOUNT; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
+	}
+	
+
+};
+
+CKnapsackProblem::CKnapsackProblem(int items, double size) {
+	srand(time(0));
+	if (items > 0 && size > 0)
+	{
+		backpackSize = size;
+		for (int i = 0; i < items; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
+	}
+	else if(items > 0)
+	{
+		backpackSize = DEFBACKPACKSIZE;
+		constructionError = ERRORSIZE;
+		for (int i = 0; i < items; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
+	}
+	else
+	{
+		backpackSize = DEFBACKPACKSIZE;
+		constructionError = ERRORSIZE;
+		for (int i = 0; i < DEFITEMCOUNT; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
 	}
 
 };
@@ -151,3 +206,7 @@ double CKnapsackProblem::getBackpackSize()
 	return backpackSize;
 };
 
+int CKnapsackProblem::getItemsAmount()
+{
+	return itemTable.size();
+};
