@@ -58,5 +58,8 @@
     <Text Include="Tekst.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="Tekst1.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -84,7 +84,7 @@ void Tests::test3()
 
 void Tests::test4()
 {
-	CKnapsackProblem* algo = new CKnapsackProblem(); //"Tekst.txt"
-	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(algo);
+	CKnapsackProblem* algo = new CKnapsackProblem("Tekst1.txt"); //() ||"Tekst.txt" || "Tekst1.txt" - best 19
+	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(100, 0.4, 0.3, algo);
 	mainAlgo.runOptimization();
 };
