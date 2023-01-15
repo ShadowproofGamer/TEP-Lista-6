@@ -100,7 +100,7 @@ void CGeneticAlgorithm::runOptimization()
 		{
 			if (rand()%1000 > crossProbability*1000)
 			{
-				CIndividual* tempIndividual = individuals->at(rand() % individuals->size())->reproduce(individuals->at(rand() % individuals->size()));
+				CIndividual* tempIndividual = (individuals->at(rand() % individuals->size())->reproduce(individuals->at(rand() % individuals->size())));
 				individuals->push_back(tempIndividual);
 			}
 		}
@@ -113,11 +113,11 @@ void CGeneticAlgorithm::runOptimization()
 				CIndividual* tempIndividual =  individuals->at(rand() % individuals->size());
 				//!
 				tempIndividual->mutate(DEFMUTATEPERCENT);
-				individuals->push_back(tempIndividual);
+				//individuals->push_back(tempIndividual);
 			}
 		}
 		//cout << "tempSizeV after for 2: " << individuals->size() << "\n";
-		//settleBestFitness();
+		settleBestFitness();
 		//cout << "best fitness: " << getBestFitness() << " time: " << (currentTime - startTime) << endl;
 		cleanPopulation();
 		currentTime = time(0);
@@ -138,13 +138,16 @@ void CGeneticAlgorithm::cleanPopulation()
 	//cout << "Size before cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 
 	int tmp = (individuals->size());
-	for (size_t i = population; i < tmp; i++)
+	//cout << "tmp: " << tmp << "\n";
+	size_t i = population;
+	for (i; i < tmp; i++)
 	{
-		//CIndividual* p = individuals->back();
+		CIndividual* p = individuals->back();
 		individuals->pop_back();
-		//delete p;
+		delete p;
 		
 	}
+	//cout << "i: " << i << "\n";
 	//cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 };
 

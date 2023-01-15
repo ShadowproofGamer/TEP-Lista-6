@@ -12,7 +12,7 @@ private:
 	vector<int>* answer;
 	double fitness = -1;
 	//debug only:
-	bool ifDefault;
+	//bool ifDefault;
 	//
 public:
 	CIndividual();

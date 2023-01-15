@@ -8,7 +8,7 @@ CIndividual::CIndividual()
 	{
 		answer->push_back(rand() % 2);
 	}
-	ifDefault = true;
+	//ifDefault = true;
 };
 
 CIndividual::CIndividual(int length)
@@ -28,7 +28,7 @@ CIndividual::CIndividual(vector<int>* other)
 	{
 		answer->push_back(other->at(i));
 	}
-	ifDefault = false;
+	//ifDefault = false;
 };
 
 void CIndividual::calculateFitness(CKnapsackProblem* parent)
