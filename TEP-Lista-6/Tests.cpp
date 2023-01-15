@@ -118,6 +118,7 @@ void Tests::test7()
 
 	runProgram("Tekst1.txt", 1000, 0.7, 0.03);
 	runProgram("Tekst.txt");
+	runProgram("Tekst67.txt", 1000, 0.7, 0.03);
 	runProgram(1000, 0.7, 0.03);
 	runProgram();
 	
@@ -125,4 +126,3 @@ void Tests::test7()
 
 
 
-//runProgram("Tekst67.txt", 1000, 0.7, 0.03);

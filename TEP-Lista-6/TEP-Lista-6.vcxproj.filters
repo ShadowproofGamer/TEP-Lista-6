@@ -62,4 +62,9 @@
       <Filter>Pliki zasobów</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Instrukcja obsługi algorytmu genetycznego.pdf">
+      <Filter>Pliki zasobów</Filter>
+    </None>
+  </ItemGroup>
 </Project>

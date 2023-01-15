@@ -146,6 +146,9 @@
     <Text Include="Tekst.txt" />
     <Text Include="Tekst1.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Instrukcja obsługi algorytmu genetycznego.pdf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
