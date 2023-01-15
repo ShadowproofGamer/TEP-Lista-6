@@ -7,6 +7,7 @@ CGeneticAlgorithm::CGeneticAlgorithm()
 	mutateProbability = DEFMUTATEPROBABILITY;
 	algo = new CKnapsackProblem();
 	individuals = new vector<CIndividual*>;
+	bestFitness = -1;
 };
 CGeneticAlgorithm::CGeneticAlgorithm(int pop, double cross, double mutate)
 {
@@ -15,6 +16,7 @@ CGeneticAlgorithm::CGeneticAlgorithm(int pop, double cross, double mutate)
 	if ((mutateProbability = mutate)) mutateProbability = DEFMUTATEPROBABILITY;
 	algo = new CKnapsackProblem();
 	individuals = new vector<CIndividual*>;
+	bestFitness = -1;
 };
 CGeneticAlgorithm::CGeneticAlgorithm(CKnapsackProblem* algorithm)
 {
@@ -23,6 +25,7 @@ CGeneticAlgorithm::CGeneticAlgorithm(CKnapsackProblem* algorithm)
 	mutateProbability = DEFMUTATEPROBABILITY;
 	algo = algorithm;
 	individuals = new vector<CIndividual*>;
+	bestFitness = -1;
 };
 CGeneticAlgorithm::CGeneticAlgorithm(int pop, double cross, double mutate, CKnapsackProblem* algorithm)
 {
@@ -31,6 +34,7 @@ CGeneticAlgorithm::CGeneticAlgorithm(int pop, double cross, double mutate, CKnap
 	if ((mutateProbability = mutate)) mutateProbability = DEFMUTATEPROBABILITY;
 	algo = algorithm;
 	individuals = new vector<CIndividual*>;
+	bestFitness = -1;
 };
 void CGeneticAlgorithm::initializePopulation() {
 	//adding vector 0
@@ -51,7 +55,7 @@ void CGeneticAlgorithm::settleBestFitness()
 {
 	for (size_t i = 0; i < individuals->size(); i++)
 	{
-		//CIndividual* temp = individuals.at(i);
+		
 		if (individuals->at(i)->getFitness() == -1) individuals->at(i)->calculateFitness(algo);
 		if (individuals->at(i)->getFitness() > bestFitness)
 		{
@@ -70,23 +74,12 @@ double CGeneticAlgorithm::getBestFitness()
 
 void CGeneticAlgorithm::runOptimization()
 {
-	/*
-	int population;
-	double crossProbability;
-	double mutateProbability;
-	double bestFitness;
-	vector<CIndividual*> individuals;
-	CKnapsackProblem* algo;
-	*/
+
 	cout << "wyniki algorytmu:" << endl;
 	initializePopulation();
 	settleBestFitness();
 
-	/*
-	cout << "all vectors:\n";
-	sortVector();
-	showAnswers();
-	*/
+
 
 	time_t startTime = time(0);
 	time_t currentTime = time(0);
@@ -94,7 +87,6 @@ void CGeneticAlgorithm::runOptimization()
 	{
 
 		
-		//cout << "tempSizeV: " << individuals->size() << "\n";
 		srand(time(0));
 		for (size_t i = 0; i < population; i++)
 		{
@@ -104,29 +96,22 @@ void CGeneticAlgorithm::runOptimization()
 				individuals->push_back(tempIndividual);
 			}
 		}
-		//cout << "tempSizeV after for 1: " << individuals->size() << "\n";
 		for (size_t i = 0; i < population; i++)
 		{
 			if(rand()%1000 > mutateProbability*1000)
 			{
-				//TODO effective individual copying
+				
 				CIndividual* tempIndividual =  individuals->at(rand() % individuals->size());
-				//!
+				
 				tempIndividual->mutate(DEFMUTATEPERCENT);
-				//individuals->push_back(tempIndividual);
+				
 			}
 		}
-		//cout << "tempSizeV after for 2: " << individuals->size() << "\n";
+		
 		settleBestFitness();
-		//cout << "best fitness: " << getBestFitness() << " time: " << (currentTime - startTime) << endl;
 		cleanPopulation();
 		currentTime = time(0);
 	}
-	/*
-	cout << "all vectors:\n";
-	sortVector();
-	showAnswers();
-	*/
 	cout << "\nbest fitness achieved: " << getBestFitness() << endl;
 	cout << "\nbest genetic code achieved: " << individuals->front()->getVector() <<"\n\n\n" << endl;
 
@@ -135,20 +120,16 @@ void CGeneticAlgorithm::runOptimization()
 void CGeneticAlgorithm::cleanPopulation()
 {
 	sortVector();
-	//cout << "Size before cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
 
 	int tmp = (individuals->size());
-	//cout << "tmp: " << tmp << "\n";
+	
 	size_t i = population;
 	for (i; i < tmp; i++)
 	{
-		CIndividual* p = individuals->back();
+		delete individuals->back();
 		individuals->pop_back();
-		delete p;
-		
 	}
-	//cout << "i: " << i << "\n";
-	//cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
+	
 };
 
 bool compareCIndividual(CIndividual* i1, CIndividual* i2)

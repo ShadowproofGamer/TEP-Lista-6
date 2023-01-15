@@ -130,9 +130,8 @@
     <ClInclude Include="CGeneticAlgorithm.h" />
     <ClInclude Include="CIndividual.h" />
     <ClInclude Include="CKnapsackProblem.h" />
-    <ClInclude Include="CMySmartPointer.h" />
     <ClInclude Include="constants.h" />
-    <ClInclude Include="CRefCounter.h" />
+    <ClInclude Include="Runner.h" />
     <ClInclude Include="Tests.h" />
   </ItemGroup>
   <ItemGroup>

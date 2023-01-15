@@ -1,5 +1,7 @@
 #include "Tests.h"
+#include "Runner.h"
 
+//przestarza³e testy nr 1-3:
 void Tests::test1()
 {
 	CKnapsackProblem prob("Tekst.txt");
@@ -82,6 +84,8 @@ void Tests::test3()
 	cout << "def destructor" << "\n";
 };
 
+
+//aktualne testy nr 4-7: 
 void Tests::test4()
 {
 	CKnapsackProblem* algo = new CKnapsackProblem("Tekst2.txt"); //() ||"Tekst.txt" || "Tekst1.txt" - best 19
@@ -93,7 +97,7 @@ void Tests::test4()
 void Tests::test5()
 {
 	CKnapsackProblem* algo = new CKnapsackProblem("Tekst1.txt"); //() ||"Tekst.txt" || "Tekst1.txt" - best 19
-	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(100, 0.7, 0.03, algo);
+	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(1000, 0.7, 0.03, algo);
 	mainAlgo.runOptimization();
 	delete algo;
 };
@@ -101,7 +105,16 @@ void Tests::test5()
 void Tests::test6()
 {
 	CKnapsackProblem* algo = new CKnapsackProblem("Tekst.txt"); //() ||"Tekst.txt" || "Tekst1.txt" - best 19
-	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(100, 0.7, 0.03, algo);
+	CGeneticAlgorithm mainAlgo = CGeneticAlgorithm(1000, 0.7, 0.03, algo);
 	mainAlgo.runOptimization();
 	delete algo;
+};
+
+void Tests::test7()
+{
+	runner::runProgram("Tekst1.txt", 1000, 0.7, 0.03);
+	runner::runProgram("Tekst67.txt", 1000, 0.7, 0.03);
+	runner::runProgram("Tekst.txt");
+	runner::runProgram(1000, 0.7, 0.03);
+	runner::runProgram();
 };

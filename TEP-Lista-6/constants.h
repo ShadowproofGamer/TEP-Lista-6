@@ -5,8 +5,7 @@
 #include <fstream>
 #include <istream>
 #include <ostream>
-#include "CMySmartPointer.h"
-#include "CRefCounter.h"
+
 
 
 //CKnapsackProblem CONSTANTS AND ERRORS:
@@ -27,6 +26,6 @@
 #define DEFCROSSPROBABILITY 0.7
 #define DEFMUTATEPROBABILITY 0.03
 //CGENETICALGORITHM OPTIMIZATION DEFAULT VALUES
-#define DEFTIME 1*20
+#define DEFTIME 1*15
 #define DEFMUTATEPERCENT 0.1
 

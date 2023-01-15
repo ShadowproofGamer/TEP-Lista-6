@@ -9,6 +9,7 @@ CKnapsackProblem::CKnapsackProblem() {
 		itemTable.push_back(make_pair(rand() % (i+1), rand() % (i+1)));
 	}
 	constructionError = 0;
+	cout << "loading random problem:\n" << endl;
 	printKnapsack();
 };
 
@@ -28,13 +29,13 @@ CKnapsackProblem::CKnapsackProblem(string filePath)
 			backpackSize = backpackS;
 			myFile >> lines;
 			if (lines <= 0) throw new exception();
-			//cout << backpackS<< "\n" << lines << "\n";
+			
 			for (size_t i = 0; i < lines; i++)
 			{
 				myFile >> first;
 				myFile >> second;
 				itemTable.push_back({ first, second });
-				//cout << first << "\t" << second << "\n";
+				
 
 			}
 			myFile.close();

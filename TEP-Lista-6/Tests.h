@@ -13,5 +13,6 @@ public:
 	static void test4();
 	static void test5();
 	static void test6();
+	static void test7();
 };
 
