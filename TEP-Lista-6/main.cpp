@@ -6,13 +6,13 @@ using namespace runner;
 
 int main() {
 	//test programu w przypadku nieznalezienia pliku / b³êdu pliku:
-	//Tests::test4();
+	//	Tests::test4();
 	//test programu w przypadku prawid³owego pliku "Tekst1.txt":
-	//Tests::test5();
+	//	Tests::test5();
 	//test programu w przypadku prawid³owego pliku (stara wersja):
-	//Tests::test6();
+	//	Tests::test6();
 	//test programu w ka¿dym rzypadku:
-	//Tests::test7();
+	//	Tests::test7();
 
 
 

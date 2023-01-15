@@ -75,7 +75,7 @@ double CGeneticAlgorithm::getBestFitness()
 void CGeneticAlgorithm::runOptimization()
 {
 
-	cout << "wyniki algorytmu:" << endl;
+	cout << "results:" << endl;
 	initializePopulation();
 	settleBestFitness();
 

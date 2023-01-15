@@ -110,11 +110,19 @@ void Tests::test6()
 	delete algo;
 };
 
+
+
 void Tests::test7()
 {
-	runner::runProgram("Tekst1.txt", 1000, 0.7, 0.03);
-	runner::runProgram("Tekst67.txt", 1000, 0.7, 0.03);
-	runner::runProgram("Tekst.txt");
-	runner::runProgram(1000, 0.7, 0.03);
-	runner::runProgram();
+	using namespace runner;
+
+	runProgram("Tekst1.txt", 1000, 0.7, 0.03);
+	runProgram("Tekst.txt");
+	runProgram(1000, 0.7, 0.03);
+	runProgram();
+	
 };
+
+
+
+//runProgram("Tekst67.txt", 1000, 0.7, 0.03);
