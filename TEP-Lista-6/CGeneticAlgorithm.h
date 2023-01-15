@@ -10,7 +10,7 @@ private:
 	int population;
 	double crossProbability;
 	double mutateProbability;
-	double bestFitness = -1;
+	double bestFitness;
 	vector<CIndividual*>* individuals;
 	CKnapsackProblem* algo;
 public:
@@ -24,5 +24,6 @@ public:
 	double getBestFitness();
 	void cleanPopulation();
 	void sortVector();
+	void showAnswers();
 };
 

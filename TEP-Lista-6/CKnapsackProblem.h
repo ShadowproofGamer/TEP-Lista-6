@@ -12,16 +12,21 @@ private:
 	int answerError = 0;
 public:
 	CKnapsackProblem();
+	CKnapsackProblem(string filePath);
+
+	//optional constructors
+	/*
 	CKnapsackProblem(double size);
 	CKnapsackProblem(vector<pair<double, double>> table);
 	CKnapsackProblem(double size, vector<pair<double, double>> table);
-	CKnapsackProblem(string filePath);
-	//optional constructors
-	//CGeneticAlgorithm(vector<int> values, vector<int> sizes);
-	//CGeneticAlgorithm(int size, vector<int> values, vector<int> sizes );
-	//CGeneticAlgorithm(int size, vector<tuple<int, int>> table);
+	CKnapsackProblem(int items);
+	CKnapsackProblem(int items, double size);
+	*/
+	
 	double getAnswerValue(vector<int>* answer);
-	double getAnswerValue(vector<bool>* answer);
+	//double getAnswerValue(vector<bool>* answer);
 	double getBackpackSize();
+	int getItemsAmount();
+	void printKnapsack();
 };
 

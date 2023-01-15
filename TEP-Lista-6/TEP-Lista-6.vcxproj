@@ -130,9 +130,8 @@
     <ClInclude Include="CGeneticAlgorithm.h" />
     <ClInclude Include="CIndividual.h" />
     <ClInclude Include="CKnapsackProblem.h" />
-    <ClInclude Include="CMySmartPointer.h" />
     <ClInclude Include="constants.h" />
-    <ClInclude Include="CRefCounter.h" />
+    <ClInclude Include="Runner.h" />
     <ClInclude Include="Tests.h" />
   </ItemGroup>
   <ItemGroup>
@@ -140,10 +139,15 @@
     <ClCompile Include="CIndividual.cpp" />
     <ClCompile Include="CKnapsackProblem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Runner.cpp" />
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Tekst.txt" />
+    <Text Include="Tekst1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Instrukcja obsługi algorytmu genetycznego.pdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
