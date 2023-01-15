@@ -9,8 +9,119 @@ CKnapsackProblem::CKnapsackProblem() {
 		itemTable.push_back(make_pair(rand() % (i+1), rand() % (i+1)));
 	}
 	constructionError = 0;
+	printKnapsack();
 };
 
+
+
+CKnapsackProblem::CKnapsackProblem(string filePath)
+{
+	try
+	{
+		ifstream myFile;
+		myFile.open(filePath);
+		if (myFile.is_open())
+		{
+			double backpackS, first, second;
+			int lines = 0;
+			myFile >> backpackS;
+			backpackSize = backpackS;
+			myFile >> lines;
+			if (lines <= 0) throw new exception();
+			//cout << backpackS<< "\n" << lines << "\n";
+			for (size_t i = 0; i < lines; i++)
+			{
+				myFile >> first;
+				myFile >> second;
+				itemTable.push_back({ first, second });
+				//cout << first << "\t" << second << "\n";
+
+			}
+			myFile.close();
+			cout << "succeeded to load from file '" << filePath << "'!\nproblem details:\n" << endl;
+			printKnapsack();
+		}
+		else
+		{
+			
+			constructionError = FILENOTOPEN;
+			srand(time(0));
+			backpackSize = DEFBACKPACKSIZE;
+			for (int i = 0; i < DEFITEMCOUNT; i++)
+			{
+				itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+			}
+			constructionError = 0;
+			cout << "failed to load from file '" << filePath << "'!\nloading random problem:\n" << endl;
+			printKnapsack();
+		}
+		
+	}
+	catch (exception e) 
+	{
+		
+		constructionError = FILECORRUPTED;
+		srand(time(0));
+		backpackSize = DEFBACKPACKSIZE;
+		for (int i = 0; i < DEFITEMCOUNT; i++)
+		{
+			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
+		}
+		constructionError = 0;
+		cout << "failed to load from file!\nloading random problem:\n" << endl;
+		printKnapsack();
+	}
+};
+
+
+double CKnapsackProblem::getAnswerValue(vector<int>* answer)
+{
+	double result = 0;
+	double size = 0;
+	int iter = 0;
+	//it answer is longer than backpack than the too long records are ignored:
+	if ((iter = answer->size()) > itemTable.size())
+	{
+		iter = itemTable.size();
+		answerError = ANSWERTOOLONG;
+	}
+	for (int i = 0; i < iter; i++)
+	{
+		if (answer->at(i) == 1)
+		{
+			result += itemTable.at(i).first;
+			size += itemTable.at(i).second;
+		}
+		
+	}
+	if (size <= backpackSize) return result;
+	else return -1;
+}
+
+
+
+double CKnapsackProblem::getBackpackSize()
+{
+	return backpackSize;
+};
+
+int CKnapsackProblem::getItemsAmount()
+{
+	return itemTable.size();
+};
+
+void CKnapsackProblem::printKnapsack()
+{
+	cout << "backpack size: " << backpackSize << "\namount of items: " << itemTable.size() << "\n"; 
+	cout << "worth:" << "\t\t" << "weight:" << endl;
+	for (size_t i = 0; i < itemTable.size(); i++)
+	{
+		cout << itemTable.at(i).first << "\t\t" << itemTable.at(i).second << endl;
+	}
+	cout << endl;
+}
+
+/*
 CKnapsackProblem::CKnapsackProblem(double size) {
 	srand(time(0));
 	if (size > 0) backpackSize = size;
@@ -44,7 +155,7 @@ CKnapsackProblem::CKnapsackProblem(int items) {
 			itemTable.push_back(make_pair(rand() % (i + 1), rand() % (i + 1)));
 		}
 	}
-	
+
 
 };
 
@@ -111,73 +222,9 @@ CKnapsackProblem::CKnapsackProblem(double size, vector<pair<double, double>> tab
 		else constructionError = ERRORVECTOR;
 	}
 };
+//*/
 
-CKnapsackProblem::CKnapsackProblem(string filePath)
-{
-	try
-	{
-		ifstream myFile;
-		myFile.open(filePath);
-		if (myFile.is_open())
-		{
-			double backpackS, first, second;
-			int lines = 0;
-			myFile >> backpackS;
-			backpackSize = backpackS;
-			myFile >> lines;
-			if (lines <= 0) throw new exception();
-			cout << backpackS<< "\n" << lines << "\n";
-			for (size_t i = 0; i < lines; i++)
-			{
-				myFile >> first;
-				myFile >> second;
-				itemTable.push_back({ first, second });
-				cout << first << "\t" << second << "\n";
-
-			}
-			myFile.close();
-		}
-		else
-		{
-			cout << "failed to load from file!\n";
-			constructionError = FILENOTOPEN;
-			CKnapsackProblem();
-		}
-		
-	}
-	catch (exception e) 
-	{
-		cout << "failed to load from file!\n";
-		constructionError = FILECORRUPTED;
-		CKnapsackProblem();
-	}
-};
-
-
-double CKnapsackProblem::getAnswerValue(vector<int>* answer)
-{
-	double result = 0;
-	double size = 0;
-	int iter = 0;
-	//it answer is longer than backpack than the too long records are ignored:
-	if ((iter = answer->size()) > itemTable.size())
-	{
-		iter = itemTable.size();
-		answerError = ANSWERTOOLONG;
-	}
-	for (int i = 0; i < iter; i++)
-	{
-		if (answer->at(i) == 1)
-		{
-			result += itemTable.at(i).first;
-			size += itemTable.at(i).second;
-		}
-		
-	}
-	if (size <= backpackSize) return result;
-	else return -1;
-}
-
+/*
 double CKnapsackProblem::getAnswerValue(vector<bool>* answer)
 {
 	double result = 0;
@@ -200,13 +247,4 @@ double CKnapsackProblem::getAnswerValue(vector<bool>* answer)
 	if (size <= backpackSize) return result;
 	else return -1;
 }
-
-double CKnapsackProblem::getBackpackSize()
-{
-	return backpackSize;
-};
-
-int CKnapsackProblem::getItemsAmount()
-{
-	return itemTable.size();
-};
+//*/

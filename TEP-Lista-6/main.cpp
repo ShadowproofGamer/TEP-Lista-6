@@ -3,10 +3,10 @@
 #include "Tests.h"
 
 int main() {
-	//Tests::test1();
-	//Tests::test2();
-	//Tests::test3();
+	//test programu w przypadku nieznalezienia pliku / b³êdu pliku:
 	Tests::test4();
+	//test programu w przypadku prawid³owego pliku:
+	Tests::test5();
 
 	return 0;
 }

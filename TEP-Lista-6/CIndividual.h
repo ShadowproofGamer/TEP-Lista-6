@@ -11,6 +11,9 @@ class CIndividual
 private:
 	vector<int>* answer;
 	double fitness = -1;
+	//debug only:
+	bool ifDefault;
+	//
 public:
 	CIndividual();
 	CIndividual(int vectorLength);

@@ -8,6 +8,7 @@ CIndividual::CIndividual()
 	{
 		answer->push_back(rand() % 2);
 	}
+	ifDefault = true;
 };
 
 CIndividual::CIndividual(int length)
@@ -27,6 +28,7 @@ CIndividual::CIndividual(vector<int>* other)
 	{
 		answer->push_back(other->at(i));
 	}
+	ifDefault = false;
 };
 
 void CIndividual::calculateFitness(CKnapsackProblem* parent)
@@ -84,7 +86,12 @@ CIndividual* CIndividual::reproduce(CIndividual* partner)
 		}
 		return new CIndividual(newAnswer);
 	}
-	else return this;
+	else 
+	{
+
+		return mutateInd();
+	}
+		
 };
 
 double CIndividual::getFitness() {
@@ -93,8 +100,8 @@ double CIndividual::getFitness() {
 
 CIndividual::~CIndividual()
 {
-	answer->clear();
-	delete answer;
+		answer->clear();
+		delete answer;
 };
 
 CIndividual* CIndividual::mutateInd()

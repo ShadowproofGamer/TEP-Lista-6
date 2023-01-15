@@ -56,7 +56,7 @@ void CGeneticAlgorithm::settleBestFitness()
 		if (individuals->at(i)->getFitness() > bestFitness)
 		{
 			bestFitness = individuals->at(i)->getFitness();
-			cout << bestFitness << "\n";
+			cout << "found new best fitness: " << bestFitness << "\n";
 		
 		}
 	}
@@ -78,6 +78,7 @@ void CGeneticAlgorithm::runOptimization()
 	vector<CIndividual*> individuals;
 	CKnapsackProblem* algo;
 	*/
+	cout << "wyniki algorytmu:" << endl;
 	initializePopulation();
 	settleBestFitness();
 
@@ -127,7 +128,7 @@ void CGeneticAlgorithm::runOptimization()
 	showAnswers();
 	*/
 	cout << "\nbest fitness achieved: " << getBestFitness() << endl;
-	
+	cout << "\nbest genetic code achieved: " << individuals->front()->getVector() <<"\n\n\n" << endl;
 
 };
 
@@ -139,9 +140,9 @@ void CGeneticAlgorithm::cleanPopulation()
 	int tmp = (individuals->size());
 	for (size_t i = population; i < tmp; i++)
 	{
-		//individuals->erase(individuals->begin()+population);
-		//delete individuals->back();
+		//CIndividual* p = individuals->back();
 		individuals->pop_back();
+		//delete p;
 		
 	}
 	//cout << "Size after cleaning: " << individuals->size() << " population before cleaning: " << population << "\n";
